@@ -2,8 +2,10 @@ const crypto = require('crypto')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const argon2 = require('argon2');
 
 const uniqueValidator = require('mongoose-unique-validator')
+mongoose.set('strictQuery', true)
 
 const Schema = mongoose.Schema
 
@@ -37,7 +39,14 @@ const UserSchema = new Schema(
     password: {
       type: String,
       required: [true, 'Please add a password'],
-      minlength: [6, 'Must be six characters long'],
+      validate: {
+        validator: function (value) {
+          // Password complexity // Password complexity check (example: requiring at least one uppercase, one lowercase, one number, one special character and a minimum length of 12 characters
+          const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{12,}$/;
+          return passwordRegex.test(value);
+        },
+        message: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character and be at least 12 characters long.'
+      },
       select: false
     },
     resetPasswordToken: String,
@@ -76,12 +85,13 @@ UserSchema.pre('save', async function (next) {
     next()
   }
 
-  const salt = await bcrypt.genSalt(10)
-  this.password = await bcrypt.hash(this.password, salt)
+  // const salt = await bcrypt.genSalt(10)
+  this.password = await argon2.hash(this.password)
 })
 
 UserSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password)
+  // return await bcrypt.compare(enteredPassword, this.password)
+  return await argon2.verify(this.password,enteredPassword)
 }
 
 UserSchema.methods.getSignedJwtToken = function () {
