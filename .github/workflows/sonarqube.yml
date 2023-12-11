@@ -47,3 +47,4 @@ jobs:
           GITHUB_TOKEN: c2hpdnJveW1ldDpnaHBfcUN3bjFJOEFJWVVUZW9JSmg1eHQ1dXRjdTVnSDlsMjNRZm5a  # Needed to get PR information
           SONAR_TOKEN: 3df578a076ef14077af09fab4302088a6b57cea0   # Generate a token on SonarQube, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
           SONAR_HOST_URL: https://sonarcloud.io   # add the URL of your instance to the secrets of this repo with the name SONAR_HOST_URL (Settings > Secrets > Actions > add new repository secret)
+  
