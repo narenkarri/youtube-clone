@@ -2,10 +2,6 @@
 
 > This is the frontend (VueJS) of the VueTube clone
 
-## API
-
-Backend RESTFUL API Repository [API](https://github.com/techreagan/youtube-clone-nodejs-api)
-
 ## Features
 
 - Sign in / Sign Up to create channel
@@ -37,7 +33,7 @@ Create .env.development.local for development then .env.production.local for pro
 Then put in your api URL
 
 ```
-VUE_APP_URL=http://localhost:3001
+APP_URL=http://localhost:3001
 ```
 
 ### Install packages
