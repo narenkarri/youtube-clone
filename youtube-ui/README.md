@@ -1,4 +1,4 @@
-# VueTube Vue Frontend - YouTube Clone
+# YouTube Clone
 
 > This is the frontend (VueJS) of the VueTube clone
 
